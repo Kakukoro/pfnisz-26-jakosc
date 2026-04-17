@@ -1,0 +1,58 @@
+const int ledR = 2;
+const int ledG = 3;
+const int ledB = 4;
+const int ledY = 5;
+
+void setup() {
+  pinMode(ledR, OUTPUT);
+  pinMode(ledG, OUTPUT);
+  pinMode(ledB, OUTPUT);
+  pinMode(ledY, OUTPUT);
+
+  Serial.begin(9600);
+}
+void blinkLED(int ledPin, int delayTime) {
+  digitalWrite(ledPin, HIGH);
+  delay(delayTime);
+  digitalWrite(ledPin, LOW);
+  delay(delayTime);
+}
+
+void loop() {
+  const char* sequence =
+    "TGATGAGCACTTTTAAAGTTCTGCTATGTGGTGCGGTATTATCCCGTGTTGACGCCGGGCAAGAGCAACTCGGTCGCCGCATACACTATTCTCAGAATGACTTGGTTGAGTACTCACCAGTCACAGAAAAGCATCTTACGGATGGCATGACAGTAAGAGAATTATGCAGTGCTGCCATAACCATGAGTGATAACACTGCTGCCAACTTACTTCTGACAACGATCGGAGGACCGAAGGAGCTAACCGCTTTTTTGCACAACATGGGGGATCATGTAACTCGCCTTGATCGTTGGGAACCGGAGCTGAATGAAGCCATACCAAACGACGAGCGTGACACCACGATGCCTGCAGCAATGGCAACAACGTTGCGCAAACTATTAACTGGCGAACTACTTACTCTAGCTTCCCGGC";
+
+  for (int i = 0; sequence[i] != '\0'; i++) {
+    char base = toupper(sequence[i]);
+
+    switch (base) {
+      case 'A':
+        blinkLED(ledR, 200);
+        break;
+      case 'T':
+        blinkLED(ledG, 200);
+        break;
+      case 'U':
+        blinkLED(ledG, 200);
+        break;
+      case 'G':
+        blinkLED(ledB, 200);
+        break;
+      case 'C':
+        blinkLED(ledY, 200);
+        break;
+      default:
+        break;
+    }
+  }
+
+  delay(1000);
+}
+
+int main() {
+  init(); 
+  setup();
+  loop();
+
+  return 0;
+}
